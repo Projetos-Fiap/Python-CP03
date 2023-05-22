@@ -1,8 +1,8 @@
 import funcoes.compras as compras
-import funcoes.entrada as entrada
+import funcoes.entradas as entradas
 import funcoes.estoque as estoque
 import funcoes.fornecedor as fornecedor
-import funcoes.saida as saida
+import funcoes.saidas as saidas
 import funcoes.suprimento as suprimento
 import os
 # criando função para limpar o terminal
@@ -10,7 +10,7 @@ limpa_a_tela = lambda: os.system('cls')
 
 ########### DEFINIÇÃO DE BASES INICIAIS ###############
 
-# Registro incial de compras
+# Registro inicial de compras
 comprasDB = [
     {
         "itens": [
@@ -132,21 +132,21 @@ while True:
                 match opcaoEstoque:
                     case "1": # ESTOQUE > MOSTRAR ENTRADAS
                         limpa_a_tela()
-                        entrada.listar_entradas(comprasDB)
+                        entradas.listar_entradas(comprasDB)
                         continue
                     case "2": # ESTOQUE > MENU SAÍDAS
                         limpa_a_tela()
                         while True:
-                            saida.mostra_menu_saidas()
+                            saidas.mostra_menu_saidas()
                             opcaoSaida = input("DIGITE A OPÇÃO DESEJADA: ")
                             match opcaoSaida:
                                 case "1": # ESTOQUE > MENU SAÍDAS > LISTAR SAÍDAS
                                     limpa_a_tela()
-                                    saida.listar_saidas(saidasDB)
+                                    saidas.listar_saidas(saidasDB)
                                     continue
                                 case "2": # ESTOQUE > MENU SAÍDAS > CADASTRAR SAÍDAS
                                     limpa_a_tela()
-                                    saida.cadastrar_saida(saidasDB, estoqueDB)
+                                    saidas.cadastrar_saida(saidasDB, estoqueDB)
                                     continue
                                 case "0": # VOLTAR
                                     limpa_a_tela()
