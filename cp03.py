@@ -52,12 +52,10 @@ while True:
                 match opcaoEntrada:
                     case "1": # ENTRADAS > CADASTRAR NOVA ENTRADA
                         limpa_a_tela()
-                        while True:
-                            entradas.cadastrar_entrada(entradas)
+                        entradas.cadastrar_entrada(entradasDB)
                     case "2": # ENTRADAS > VER TODAS AS NF
                         limpa_a_tela()
-                        while True:
-                            entradas.listar_entradas(entradas)
+                        entradas.listar_entradas(entradasDB)
                     case "0": # VOLTAR
                         limpa_a_tela()
                         break
@@ -74,12 +72,10 @@ while True:
                 match opcaoSaida:
                     case "1": # SAÍDAS > CADASTRAR NOVA SAÍDA
                         limpa_a_tela()
-                        while True:
-                            saidas.cadastrar_saida()
+                        saidas.cadastrar_saida(saidasDB)
                     case "2": # SAÍDAS > VER TODAS AS SAÍDAS
                         limpa_a_tela()
-                        while True:
-                            saidas.cadastrar_saida()
+                        saidas.listar_saidas(saidasDB)
                     case "0": # VOLTAR
                         limpa_a_tela()
                         break
