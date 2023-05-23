@@ -13,14 +13,14 @@ limpa_a_tela = lambda: os.system('cls')
 ########### DEFINIÇÃO DE BASES INICIAIS ###############
 
 # Registro inicial de entradas (vendas da vinheria, associadas a uma NF)
-entradas = [
+entradasDB = [
     {"nf": "000000001", "cliente": "André", "cpf": "12345678900", "descricao": "1 Tinto", "valor": 50.0},
     {"nf": "000000002", "cliente": "Vitor", "cpf": "98765432100", "descricao": "1 Branco", "valor": 60.0},
     # Adicione mais registros conforme necessário
 ]
 
 # Registro inicial de saídas (compras/contas da vinheria, associadas a uma NF)
-saidas = [
+saidasDB = [
     {"nf": "100000001", "fornecedor": "Fulano", "cnpj": "35250222000108", "descricao": "100 Garrafas", "valor": 500.0},
     {"nf": "200000002", "fornecedor": "Ciclano", "cnpj": "98765432000199", "descricao": "100 Rolhas", "valor": 200.0},
     # Adicione mais registros conforme necessário
