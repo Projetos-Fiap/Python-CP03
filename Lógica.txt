@@ -5,12 +5,14 @@ Menu -> Entradas e saídas (Contas a receber, contas a pagar)
 1) ENTRADAS
 Cadastrar NFs de entradas (vendas da vinheria)
     Nome do consumidor, CPF, descrição, número da NF e valor 
+Ver todas NFs
 
 
 2) SAÍDAS
 Cadastrar NFs de contas (para pagar)
     Nome do fornecedor, CNPJ, Descrição, número da NF e Valor
     Campo informando se está paga ou não
+Ver todas NFs
 
 
 Valor Total de todas as NF do dia, com Saldo geral

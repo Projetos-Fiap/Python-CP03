@@ -2,59 +2,36 @@
 # Membros do grupo: André Lambert (RM99148), Alessandra Vaiano (RM551497), 
 # Bryan William (RM551305), Lucas Feijó (RM99727) e Vitor Maia (RM99658).
 
-import funcoes.compras as compras
 import funcoes.entradas as entradas
-import funcoes.estoque as estoque
-import funcoes.fornecedor as fornecedor
 import funcoes.saidas as saidas
-import funcoes.suprimento as suprimento
+
 import os
 # criando função para limpar o terminal
-limpa_a_tela = lambda: os.system('cls')
+limpa_a_tela = lambda: os.system('clear')
 
 ########### DEFINIÇÃO DE BASES INICIAIS ###############
 
-# Registro inicial de entradas (vendas da vinheria)
+# Registro inicial de entradas (vendas da vinheria, associadas a uma NF)
 entradasDB = [
     {
         "itens": [
-            {"suprimento": "VINHO TINTO", "valor": 50, "CPF_CLIENTE": "080.412.990-83", "quantidade": 2},
-            {"suprimento": "VINHO BRANCO", "valor": 60, "CPF_CLIENTE": "511.262.840-50", "quantidade": 2},
-            {"suprimento": "VINHO ROSÉ", "valor": 70, "CPF_CLIENTE": "427.073.250-40", "quantidade": 1},
-            {"suprimento": "ESPUMANTE", "valor": 80, "CPF_CLIENTE": "166.299.580-63", "quantidade": 1}
+            {"nf": "000000001", "nome": "ANDRÉ LAMBERT", "cpf": 44146254833, "descricao": "2 vinho tinto", "valor": 60},
+            {"nf": "000000002","nome": "VITOR MAIA", "cpf": 12345678912, "descricao": "2 vinho branco", "valor": 70}
         ],
-        "data": "02:43 - 22/5/2023",
-        "descricao": "Compra inicial"
     }  
 ]
 
-# Registro inicial de saídas (compras da vinheria)
+# Registro inicial de saídas (compras/contas da vinheria, associadas a uma NF)
 saidasDB = [
     {
         "itens": [
-            {"suprimento": "ROLHAS", "valor": 3.0, "CNPJ_FORNECEDOR": "60.718.835/0001-03", "quantidade": 1},
-            {"suprimento": "GARRAFAS", "valor": 5.0, "CNPJ_FORNECEDOR": "60.718.835/0001-03", "quantidade": 1}
+            {"nf": "100000001", "fornecedor": "ANDRÉ LAMBERT", "cnpj": 44146254833, "descricao": "10 rolhas", "valor": 20},
+            {"nf": "100000002","fornecedor": "VITOR MAIA", "cnpj": 12345678912, "descricao": "10 garrafas", "valor": 30}
         ],
-        "data": "02:48 - 22/05/2023",
-        "descricao": "Saída inicial"
-    }
+    }  
 ]
 
-# Registro inicial de estoque
-estoqueDB = [
-    {"suprimento": "ROLHAS", "valor": 3.0, "CNPJ_FORNECEDOR": "60.718.835/0001-03", "quantidade": 1},
-    {"suprimento": "GARRAFAS", "valor": 5.0, "CNPJ_FORNECEDOR": "60.718.835/0001-03", "quantidade": 1},
-    {"suprimento": "CAIXAS", "valor": 4.0, "CNPJ_FORNECEDOR": "49.548.348/0001-07", "quantidade": 1},
-    {"suprimento": "RÓTULOS", "valor": 2.0, "CNPJ_FORNECEDOR": "49.548.348/0001-07", "quantidade": 1}
-]
-
-# Registro inicial de fornecedores
-fornecedoresDB = [
-    {"fornecedor": "FULANO", "cnpj": "60.718.835/0001-03"},
-    {"fornecedor": "CICLANO", "cnpj": "49.548.348/0001-07"}
-]
-
-# mostrar menu principal
+# Mostrar menu principal
 def mostra_menu_principal():
     print("\n")
     print("=========================")
@@ -76,48 +53,16 @@ while True:
             limpa_a_tela()
             while True: 
                 entradas.mostra_menu_entradas()
-                opcaoCompra = input("DIGITE A OPÇÃO DESEJADA: ")
-                match opcaoCompra:
-                    case "1": # COMPRAS > MENU DE FORNECEDORES
+                opcaoEntrada = input("DIGITE A OPÇÃO DESEJADA: ")
+                match opcaoEntrada:
+                    case "1": # ENTRADAS > CADASTRAR NOVA ENTRADA
                         limpa_a_tela()
                         while True:
-                            fornecedor.mostra_lista_de_fornecedores(fornecedoresDB)
-                            opcaoFornecedor = input('DIGITE A OPÇÃO DESEJADA: ')
-                            match opcaoFornecedor:
-                                case "9": # COMPRAS > MENU DE FORNECEDORES > CADASTRAR NOVO FORNECEDOR
-                                    limpa_a_tela()
-                                    fornecedor.cadastrar_fornecedor(fornecedoresDB)
-                                    continue
-                                case "0": # VOLTAR
-                                    limpa_a_tela()
-                                    break
-                                case _:
-                                    print('OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n')
-                                    continue
-                    case "2": # COMPRAS > MENU DE SUPRIMENTOS
+                            entradas.cadastrar_entrada()
+                    case "2": # ENTRADAS > VER TODAS AS NF
                         limpa_a_tela()
                         while True:
-                            suprimento.mostra_menu_comprar_suprimentos(suprimentosDB)
-                            opcaoSuprimento = input('DIGITE A OPÇÃO DESEJADA: ')
-                            match opcaoSuprimento:
-                                case "1": # COMPRAS > MENU DE SUPRIMENTOS > COMPRAR SUPRIMENTO
-                                    limpa_a_tela()
-                                    suprimento.comprar_suprimento(suprimentosDB, estoqueDB, comprasDB)
-                                    continue
-                                case "2":# COMPRAS > MENU DE SUPRIMENTOS > CADASTRAR NOVO SUPRIMENTO
-                                    limpa_a_tela()
-                                    suprimento.cadastrar_suprimento(suprimentosDB, estoqueDB)
-                                    continue
-                                case "0": # VOLTAR
-                                    limpa_a_tela()
-                                    break
-                                case _:
-                                    print('OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n')
-                                    continue
-                    case "3": # COMPRAS > VER TODAS AS COMPRAS
-                        limpa_a_tela()
-                        compras.ver_compras(comprasDB)
-                        continue
+                            entradas.listar_entradas()
                     case "0": # VOLTAR
                         limpa_a_tela()
                         break
@@ -125,48 +70,30 @@ while True:
                         print('OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n')
                         continue
             continue
+        
         case "2": # SAÍDAS
             limpa_a_tela()
-            while True:
-                estoque.mostra_menu_estoque()
-                opcaoEstoque = input("DIGITE A OPÇÃO DESEJADA: ")
-                match opcaoEstoque:
-                    case "1": # ESTOQUE > MOSTRAR ENTRADAS
-                        limpa_a_tela()
-                        entradas.listar_entradas(comprasDB)
-                        continue
-                    case "2": # ESTOQUE > MENU SAÍDAS
+            while True: 
+                saidas.mostra_menu_saidas()
+                opcaoSaida = input("DIGITE A OPÇÃO DESEJADA: ")
+                match opcaoSaida:
+                    case "1": # SAÍDAS > CADASTRAR NOVA SAÍDA
                         limpa_a_tela()
                         while True:
-                            saidas.mostra_menu_saidas()
-                            opcaoSaida = input("DIGITE A OPÇÃO DESEJADA: ")
-                            match opcaoSaida:
-                                case "1": # ESTOQUE > MENU SAÍDAS > LISTAR SAÍDAS
-                                    limpa_a_tela()
-                                    saidas.listar_saidas(saidasDB)
-                                    continue
-                                case "2": # ESTOQUE > MENU SAÍDAS > CADASTRAR SAÍDAS
-                                    limpa_a_tela()
-                                    saidas.cadastrar_saida(saidasDB, estoqueDB)
-                                    continue
-                                case "0": # VOLTAR
-                                    limpa_a_tela()
-                                    break
-                                case _ :
-                                    print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n")
-                                    continue
-                        continue
-                    case "3": # ESTOQUE > MOSTRAR ESTOQUE
+                            saidas.cadastrar_saida()
+                    case "2": # SAÍDAS > VER TODAS AS SAÍDAS
                         limpa_a_tela()
-                        estoque.mostra_estoque(estoqueDB)
-                        continue
+                        while True:
+                            saidas.cadastrar_saida()
                     case "0": # VOLTAR
                         limpa_a_tela()
                         break
-                    case _:
+                    case _ :
                         print('OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n')
                         continue
             continue
+        
+        
         case "0": # FINALIZAR O PROGRAMA
             break
         case _:
