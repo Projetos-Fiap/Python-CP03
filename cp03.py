@@ -4,6 +4,7 @@
 
 import funcoes.entradas as entradas
 import funcoes.saidas as saidas
+import funcoes.saldo as saldo
 
 import os
 # criando função para limpar o terminal
@@ -93,6 +94,10 @@ while True:
                         continue
             continue
         
+        case "3": # SALDO
+            limpa_a_tela()
+            while True:
+                saldo.mostra_menu_saldo()
         
         case "0": # FINALIZAR O PROGRAMA
             break
