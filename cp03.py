@@ -85,12 +85,18 @@ while True:
             continue
         
         case "3": # SALDO
-            limpa_a_tela()
-            saldo.mostra_menu_saldo()
-            saldo_geral = saldo.calcular_saldo(entradasDB, saidasDB)
-            print(f"Saldo Geral: R$ {saldo_geral:.2f}")
-                
-        
+            while True:
+                limpa_a_tela()
+                saldo.mostra_menu_saldo(entradasDB, saidasDB)
+                opcaoSaldo = input("DIGITE A OPÇÃO DESEJADA: ")
+                match opcaoSaldo: 
+                    case "0": #VOLTAR
+                        limpa_a_tela
+                        break
+                    case _ :
+                        print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE\n")
+                        continue
+
         case "0": # FINALIZAR O PROGRAMA
             break
         case _:
