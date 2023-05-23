@@ -86,8 +86,10 @@ while True:
         
         case "3": # SALDO
             limpa_a_tela()
-            while True:
-                saldo.mostra_menu_saldo()
+            saldo.mostra_menu_saldo()
+            saldo_geral = saldo.calcular_saldo(entradasDB, saidasDB)
+            print(f"Saldo Geral: R$ {saldo_geral:.2f}")
+                
         
         case "0": # FINALIZAR O PROGRAMA
             break
