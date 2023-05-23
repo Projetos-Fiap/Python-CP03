@@ -1,5 +1,5 @@
 import os
-clear = lambda: os.system('clear')
+clear = lambda: os.system('cls')
 
 # Menu de Saídas
 def mostra_menu_saidas():
